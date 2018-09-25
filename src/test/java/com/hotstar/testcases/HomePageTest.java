@@ -42,7 +42,7 @@ public class HomePageTest extends TestBase {
 		pdpPage=new PrgDetailPage();
 	}
 
-/*	@Test(priority = 1)
+	@Test(priority = 1)
 	public void verifyHomePageElements() {
 		homePage.verifyElements();
 
@@ -99,12 +99,18 @@ public class HomePageTest extends TestBase {
 		isElementPresent(homePage.footerTwitterLogo);
 		isElementPresent(homePage.footerTPlayStoreLogo);
 		isElementPresent(homePage.footerTAppStoreLogo);
-	}*/
+	}
 	
 	@Test(priority=10)
 	public void verifyFirstThumbnailTopPicksForYou(){
 		pdpPage=homePage.clickOnFirstThumbnail();
 		System.out.println("Program Detail Page launched");
+	}
+	
+	@Test(priority=11)
+	public void verifySignIn(){
+		homePage.clickOnSignIn();
+		System.out.println("Sign In Page launched");
 	}
 	
 	@AfterMethod

@@ -154,4 +154,8 @@ public class HomePage extends TestBase {
 		explicitwaitClick(firstThumbnailPopularTVShows);
 		return new PrgDetailPage();
 	}
+	public SignInPage clickOnSignIn(){
+		explicitwaitClick(homeSignIn);
+		return new SignInPage();
+	}
 }
