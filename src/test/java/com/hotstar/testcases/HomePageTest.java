@@ -1,7 +1,5 @@
 package com.hotstar.testcases;
 
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.interactions.ClickAction;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -26,10 +24,6 @@ public class HomePageTest extends TestBase {
 	PremiumPage premiumPage;
 	PrgDetailPage pdpPage;
 
-	public HomePageTest() {
-		super();
-	}
-
 	@BeforeMethod
 	public void setUp() {
 		initialize();
@@ -39,7 +33,7 @@ public class HomePageTest extends TestBase {
 		sportsPage = new SportsPage();
 		newsPage = new NewsPage();
 		premiumPage = new PremiumPage();
-		pdpPage=new PrgDetailPage();
+		pdpPage = new PrgDetailPage();
 	}
 
 	@Test(priority = 1)
@@ -49,70 +43,77 @@ public class HomePageTest extends TestBase {
 	}
 
 	@Test(priority = 2)
-	public void verifyHamburgerOptions() {
-		Actions builder = new Actions(driver);
-		builder.moveToElement(homePage.hambugerIcon).build().perform();
+	public void verifyHamburgerLinks() {
+		mouseOver(homePage.hambugerIcon);
+		System.out.println("Hovered over element");
 		homePage.verifyHamburgerOptions();
 	}
 
 	@Test(priority = 3)
+	public void verifyMoviesLinks() {
+		mouseOver(homePage.homeMovies);
+		homePage.verifyMoviesOptions();
+	}
+
+	@Test(priority = 4)
 	public void verifyTitle() {
 		String title = homePage.verifyHomePageTitle();
 		Assert.assertEquals(title, "Hotstar - Watch TV Shows, Movies, Live Cricket Matches & News Online");
 	}
 
-	@Test(priority = 4)
+	@Test(priority = 5)
 	public void verifyTVTab() {
 		tvPage = homePage.clickOnTV();
 		System.out.println("TV Tab launched");
 	}
 
-	@Test(priority = 5)
+	@Test(priority = 6)
 	public void verifyMoviesTab() {
 		moviesPage = homePage.clickOnMovies();
 		System.out.println("Movies Tab launched");
 	}
 
-	@Test(priority = 6)
+	@Test(priority = 7)
 	public void verifySportsTab() {
 		sportsPage = homePage.clickOnSports();
 		System.out.println("Sports Tab launched");
 	}
 
-	@Test(priority = 7)
+	@Test(priority = 8)
 	public void verifyNewsTab() {
 		newsPage = homePage.clickOnNews();
 		System.out.println("News Tab launched");
 	}
 
-	@Test(priority = 8)
+	@Test(priority = 9)
 	public void verifyPremiumTab() {
 		premiumPage = homePage.clickOnPremium();
 		System.out.println("Premium Tab launched");
 	}
 
-	@Test(priority=9)
-	public void verifyFooterLinks(){
+	@Test(priority = 10)
+	public void verifyFooterLinks() {
 		scrollFullPageDown();
-		
-		isElementPresent(homePage.footerFbLogo);
-		isElementPresent(homePage.footerTwitterLogo);
-		isElementPresent(homePage.footerTPlayStoreLogo);
-		isElementPresent(homePage.footerTAppStoreLogo);
+
+		isElementVisible(homePage.footerFbLogo);
+		isElementVisible(homePage.footerTwitterLogo);
+		isElementVisible(homePage.footerTPlayStoreLogo);
+		isElementVisible(homePage.footerTAppStoreLogo);
 	}
-	
-	@Test(priority=10)
-	public void verifyFirstThumbnailTopPicksForYou(){
-		pdpPage=homePage.clickOnFirstThumbnail();
+
+	@Test(priority = 11)
+	public void verifyFirstThumbnailTopPicksForYou() {
+		pdpPage = homePage.clickOnFirstThumbnail();
+		isElementVisible(pdpPage.watchText);
 		System.out.println("Program Detail Page launched");
 	}
-	
-	@Test(priority=11)
-	public void verifySignIn(){
+
+	@Test(priority = 12)
+	public void verifySignIn() {
 		homePage.clickOnSignIn();
 		System.out.println("Sign In Page launched");
 	}
-	
+
 	@AfterMethod
 	public void tearDown() {
 		driver.quit();

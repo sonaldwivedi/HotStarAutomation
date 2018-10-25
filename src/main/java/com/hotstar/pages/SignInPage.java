@@ -17,38 +17,55 @@ public class SignInPage extends TestBase{
 	public WebElement signInFBBtn;
 	
 	@FindBy(xpath="//input[@id='email']")
-	WebElement emailTxtField;
+	public WebElement emailTxtField;
 	
 	@FindBy(xpath="//input[@id='password']")
-	WebElement passTxtField;
+	public WebElement passTxtField;
 	
 	@FindBy(xpath="//button[@type='submit']")
-	WebElement submitBtn;
+	public WebElement signinBtn;
 	
 	@FindBy(xpath="//span[text()='Forgot Password']")
-	WebElement forgotPassLink;
+	public WebElement forgotPassLink;
 	
 	@FindBy(xpath="//div[text()='Sign Up']")
-	WebElement signUpLink;
+	public WebElement signUpLink;
 	
 	@FindBy(xpath="//p[text()='Please enter a valid email address']")
-	WebElement emailErr;
+	public WebElement emailErr;
 	
 	@FindBy(xpath="//p[text()='Please enter a password']")
-	WebElement passErr;
+	public WebElement passErr;
+	
+	@FindBy(xpath="//div[text()='This email address is not registered with us. Please try again or create a new account.']")
+	public WebElement emailRegError;
 	
 	public SignInPage(){
 		PageFactory.initElements(driver, this);
 	}
 	
 	public void verifyElements(){
-		isElementPresent(signInTitle);
-		isElementPresent(closeBtn);
-		isElementPresent(signInFBBtn);
-		isElementPresent(emailTxtField);
-		isElementPresent(passTxtField);
-		isElementPresent(submitBtn);
-		isElementPresent(forgotPassLink);
-		isElementPresent(signUpLink);
+		isElementVisible(signInTitle);
+		isElementVisible(closeBtn);
+		isElementVisible(signInFBBtn);
+		isElementVisible(emailTxtField);
+		isElementVisible(passTxtField);
+		isElementVisible(signinBtn);
+		isElementVisible(forgotPassLink);
+		isElementVisible(signUpLink);
 	}
+	
+	public void validSignIn(){
+		emailTxtField.sendKeys(prop.getProperty("email"));
+		passTxtField.sendKeys(prop.getProperty("password"));
+		signinBtn.click();
+	}
+	
+	public void invalidSignIn(){
+		emailTxtField.sendKeys("jdshdh@gmail.com");
+		passTxtField.sendKeys("ddhfjdf");
+		signinBtn.click();
+		
+	}
+
 }

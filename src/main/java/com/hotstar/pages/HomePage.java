@@ -1,5 +1,9 @@
 package com.hotstar.pages;
 
+
+
+import java.util.List;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -15,7 +19,7 @@ public class HomePage extends TestBase {
 	@FindBy(xpath = "(//a[@href='/tv'])[2]")
 	public WebElement homeTV;
 
-	@FindBy(xpath = "(//a[@href='/movies'])[2]")
+	@FindBy(xpath = "(//a[@href='/moviess'])[2]")
 	public WebElement homeMovies;
 
 	@FindBy(xpath = "(//a[@href='/sports'])[2]")
@@ -55,21 +59,73 @@ public class HomePage extends TestBase {
 	@FindBy(xpath = "//span[@class='link-name' and text()='Languages']")
 	public WebElement hamburgerLanguages;
 	
+	//Movies 
+	@FindBy(xpath="//a[text()='Hindi']")
+	public WebElement hindi;
+	
+	@FindBy(xpath="//a[text()='Bengali']")
+	public WebElement bengali;
+	
+	@FindBy(xpath="//a[text()='Telugu']")
+	public WebElement telugu;
+	
+	@FindBy(xpath="//a[text()='Malayalam']")
+	public WebElement malayalam;
+	
+	@FindBy(xpath="//a[text()='Tamil']")
+	public WebElement tamil;
+	
+	@FindBy(xpath="//a[text()='Marathi']")
+	public WebElement marathi;
+	
+	@FindBy(xpath="//a[text()='English']")
+	public WebElement english;
+	
+	@FindBy(xpath="//a[text()='Kannada']")
+	public WebElement kannada;
+	
+	@FindBy(xpath="//a[text()='Gujarati']")
+	public WebElement gujarati;
+	
+	//Search
+	
 	@FindBy(xpath="//div[@class='search' and text()='SEARCH']")
 	public WebElement homeSearchText;
 	
 	@FindBy(xpath="//div[@class='searchIcon']")
 	public WebElement homeSearchIcon;
 	
+	@FindBy(xpath="//input[@type='search']")
+	public WebElement searchTxtBox;
+	
+	@FindBy(xpath="//div[@class='result-holder element-show']")
+	public WebElement searchAutoCmplt;
+	
+	@FindBy(xpath="//input[@type='search' and @placeholder='Search for shows, movies, sports and TV channels']")
+	public WebElement searchHelpTxt;
+	
+	@FindBy(xpath="//div[@class='search-wrap']//div//div//span[not (@class)]")
+	public List<WebElement> searchPrgmList;
+	
+	
+	@FindBy(xpath="(//div[@class='search-wrap']/div/div/span[not (@class)])[1]")
+	public WebElement searchFirstPrgmTitle;
+	
+	@FindBy(xpath="(//div[@class='search-wrap']//span[@class='subtitle'])[1]")
+	public WebElement searchFirstSubtitle;
+	
 	@FindBy(xpath="//div[@class='signIn displayElement' and text()='SIGN IN']")
 	public WebElement homeSignIn;
+	
+	@FindBy(xpath="//div[@class='user-pic displayElement']")
+	public WebElement homeUserIcon;
 	
 	//Carousel
 	
 	@FindBy(xpath="(//ul[@class='slick-dots']//button)[1]")
 	public WebElement pageIndicator1;
 	
-	@FindBy(xpath="(//div[@class='content-holder']//div[@class='toptitle isAd'])[1]")
+	@FindBy(xpath="(//div[@class='toptitle']//following-sibling::div[@class='title ellipsize'])[1]")
 	public WebElement carouselPrgmTitle;
 	
 	//Footer WebElements
@@ -90,37 +146,53 @@ public class HomePage extends TestBase {
 	@FindBy(xpath="(//a[text()='Popular TV Shows']/../../../following-sibling::div//article)[1]")
 	public WebElement firstThumbnailPopularTVShows;
 	
+	@FindBy(xpath="(//div[@class='card  card-img-container'])[1]")
+	public WebElement firstThumbnail;
+	
+	
 			
 	public HomePage() {
+		
 		PageFactory.initElements(driver, this);
 	}
 
 	public void verifyElements() {
-
-		isElementPresent(homeTV);
-		isElementPresent(hotstarLogo);
-		isElementPresent(homeMovies);
-		isElementPresent(homeSports);
-		isElementPresent(homeNews);
-		isElementPresent(homePremium);
-		isElementPresent(homeSearchIcon);
-		isElementPresent(homeSignIn);
-		isElementPresent(pageIndicator1);
-		isElementPresent(carouselPrgmTitle);
+		isElementVisible(homeTV);
+		isElementVisible(hotstarLogo);
+		isElementVisible(homeMovies);
+		isElementVisible(homeSports);
+		isElementVisible(homeNews);
+		isElementVisible(homePremium);
+		isElementVisible(homeSearchIcon);
+		isElementVisible(homeSignIn);
+		isElementVisible(pageIndicator1);
+		isElementVisible(carouselPrgmTitle);
 
 	}
 
 	public void verifyHamburgerOptions() {
-		isElementPresent(hamburgerHome);
-		isElementPresent(hamburgerMovies);
-		isElementPresent(hamburgerTV);
-		isElementPresent(hamburgerSports);
-		isElementPresent(hamburgerNews);
-		isElementPresent(hamburgerPremium);
-		isElementPresent(hamburgerChannels);
-		isElementPresent(hamburgerLanguages);
+		isElementVisible(hamburgerHome);
+		isElementVisible(hamburgerMovies);
+		isElementVisible(hamburgerTV);
+		isElementVisible(hamburgerSports);
+		isElementVisible(hamburgerNews);
+		isElementVisible(hamburgerPremium);
+		isElementVisible(hamburgerChannels);
+		isElementVisible(hamburgerLanguages);
 	}
-
+	
+	public void verifyMoviesOptions() {
+		isElementVisible(hindi);
+		isElementVisible(bengali);
+		isElementVisible(telugu);
+		isElementVisible(malayalam);
+		isElementVisible(tamil);
+		isElementVisible(marathi);
+		isElementVisible(english);
+		isElementVisible(kannada);
+		isElementVisible(gujarati);
+	}
+	
 	public String verifyHomePageTitle() {
 		return driver.getTitle();
 	}
@@ -157,5 +229,10 @@ public class HomePage extends TestBase {
 	public SignInPage clickOnSignIn(){
 		explicitwaitClick(homeSignIn);
 		return new SignInPage();
+	}
+	
+	public SearchPage SearchText(){
+		explicitwaitClick(homeSearchIcon);
+		return new SearchPage();
 	}
 }
